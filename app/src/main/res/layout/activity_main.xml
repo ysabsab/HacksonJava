@@ -14,25 +14,26 @@
         android:text="Let's go NSL!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.475"
+        app:layout_constraintHorizontal_bias="0.206"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429" />
+        app:layout_constraintVertical_bias="0.216" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
-        tools:layout_editor_absoluteX="309dp"
-        tools:layout_editor_absoluteY="257dp" />
+        tools:layout_editor_absoluteX="306dp"
+        tools:layout_editor_absoluteY="275dp" />
 
-    <TextView
-        android:id="@+id/textView"
+    <CheckBox
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="290dp"
-        tools:layout_editor_absoluteY="205dp" />
+        android:text="CheckBox"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="128dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
