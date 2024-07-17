@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         //ボタンが押されたら、入力された文字を判定
         //findViewById(R.id.button);
 
