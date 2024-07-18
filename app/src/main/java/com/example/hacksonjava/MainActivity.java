@@ -10,7 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity
 {
+    // 送信するリストの変数
     //private List<String> selectedTexts = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity
             return insets;
         });
 
-        /**　↓変数プール↓**　//
+        //↓変数プール↓
         /*
         //チェックボックスに入れられた文字をまず変数に格納する
         CheckBox CheckBox_mozi = findVieById(R.id.checkbox);
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         //**　↑変数プール↑　**//
 
 
-        /***チェックボックスの状態遷移を監視しておき、チャックの有無でリストにチャックの文字を入力するか決める。***/
+        //*チェックボックスの状態遷移を監視しておき、チャックの有無でリストにチャックの文字を入力するか決める。***/
         /*
         //一個目のチェックボックス
         checkBox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -64,6 +66,10 @@ public class MainActivity extends AppCompatActivity
         for (String text : selectedTexts) {
             Log.d("Selected Text", text);
         }
+
+      // 送信処理が行われたら、Loop動画を流すための画面を遷移のためのインテントを作成
+        Intent intent = new Intent(MainActivity.this, VideoActivity.class);
+        startActivity(intent);
           */
     }
     //test
