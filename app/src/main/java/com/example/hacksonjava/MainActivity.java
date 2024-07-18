@@ -7,6 +7,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -70,10 +80,10 @@ public class MainActivity extends AppCompatActivity
             /***↑ここにリストの内容を送信する処理を実装↑***/
 
             //送信処理が行われたら、Loop動画を流すための画面を遷移のためのインテントを作成
-            Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
+            //Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
 
             //作成したいんてんとを実行
-            startActivity(intent);
+            //startActivity(intent);
         }
     //test
 }

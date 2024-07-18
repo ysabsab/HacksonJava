@@ -6,6 +6,7 @@ public class LoopVideoActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_video);
 
         //()、取得する
