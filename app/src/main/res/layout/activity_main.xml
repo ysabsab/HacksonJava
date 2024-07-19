@@ -23,14 +23,14 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="688dp"
-        android:layout_height="1050dp"
+        android:layout_width="580dp"
+        android:layout_height="908dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.994"
         app:srcCompat="@drawable/筐体" />
 
     <ImageView
@@ -56,7 +56,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.903" />
+        app:layout_constraintVertical_bias="0.887" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
