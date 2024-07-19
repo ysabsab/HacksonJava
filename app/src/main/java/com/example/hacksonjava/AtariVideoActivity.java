@@ -4,6 +4,7 @@ import android.content.Intent;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +14,11 @@ public class AtariVideoActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video);
+        setContentView(R.layout.activity_main);
 
         //画面を挿入
         VideoView videoView = findViewById(R.id.videoView);
+        Button sendButton = findViewById(R.id.button);
 
         //動画のurlを挿入
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.atari_video);
@@ -33,7 +35,7 @@ public class AtariVideoActivity extends AppCompatActivity{
         // 動画再生が終了したときのリスナーを設定
         videoView.setOnCompletionListener(mp -> {
             // 動画が終了したらMainActivityに遷移
-            Intent intent = new Intent(AtariVideoActivity.this, MainActivity.class);
+            Intent intent = new Intent(AtariVideoActivity.this, LoopVideoActivity.class);
             startActivity(intent);
 
             // AtariVideoActivityを終了する
