@@ -28,9 +28,9 @@ public class HazureVideoActivity extends AppCompatActivity {
         //動画開始
         videoView.start();
 
-        //動画が終わったら、Loop動画を流すための画面を遷移のためのインテントを作成
-        Intent intent = new Intent(HazureVideoActivity.this, LoopVideoActivity.class);
-        //作成したいんてんとを実行
-        startActivity(intent);
+//        //動画が終わったら、Loop動画を流すための画面を遷移のためのインテントを作成
+//        Intent intent = new Intent(HazureVideoActivity.this, LoopVideoActivity.class);
+//        //作成したいんてんとを実行
+//        startActivity(intent);
     }
 }

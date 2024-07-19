@@ -1,5 +1,10 @@
 package com.example.hacksonjava;
 
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.MediaController;
+import android.widget.VideoView;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**メインから状態遷移をしてきて、ループ画像を流す処理**/
 public class LoopVideoActivity extends AppCompatActivity{
