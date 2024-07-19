@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
+    //
     private void playMovie()
     {
         VideoView videoView = (VideoView) findViewById(R.id.videoView);
