@@ -27,7 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--アクティビティを追加-->
         <activity android:name=".LoopVideoActivity" />
+        <activity android:name=".AtariVideoActivity" />
+        <activity android:name=".HazureVideoActivity" />
     </application>
 
 </manifest>

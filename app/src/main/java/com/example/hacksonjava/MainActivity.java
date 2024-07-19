@@ -14,17 +14,20 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.io.InputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+{
     /***このクラスで利用する変数定義***/
     // 送信するテキストの設定
     private String selectedText = "";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) ->
+        {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
@@ -35,27 +38,34 @@ public class MainActivity extends AppCompatActivity {
         Button sendButton = findViewById(R.id.button);
 
         /************↑activity_mainの各種機能を変数にするプール↑**********************/
-        sendButton.setOnClickListener(new View.OnClickListener() {
+        sendButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 sendSelectedText();
-                Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
+                Intent intent = new Intent(MainActivity.this, HazureVideoActivity.class);
+                //LoopVideoActivity.class
                 startActivity(intent);
             }
         });
     }
 
     //送信処理
-    private void sendSelectedText() {
+    private void sendSelectedText()
+    {
         selectedText = "start";
         // 送信する文字のログを出力する
         Log.d("Selected Text", selectedText);
 
-        // サーバーにデータを送信
-        new Thread(new Runnable() {
+        // サーバーにデータを送信するスレッドを立てる。
+        new Thread(new Runnable()
+        {
             @Override
-            public void run() {
-                try {
+            public void run()
+            {
+                try
+                {
                     Log.d("TCP", "Connecting to server...");
                     // サーバーのIPアドレスとポート番号を指定してソケットを作成
                     Socket socket = new Socket("10.0.0.102", 5000);
@@ -72,15 +82,19 @@ public class MainActivity extends AppCompatActivity {
                     int bytesRead;
                     StringBuilder responseBuilder = new StringBuilder();
 
-                    socket.setSoTimeout(10000); // 10秒の読み取りタイムアウト
+                    socket.setSoTimeout(1000000); // 1000秒の読み取りタイムアウト
 
-                    try {
-                        while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    try
+                    {
+                        //サーバーとの接続を立てておく
+                        while ((bytesRead = inputStream.read(buffer)) != -1)
+                        {
                             String chunk = new String(buffer, 0, bytesRead);
                             responseBuilder.append(chunk);
 
-                            /***reach!の文字列が含まれているし、動画を流す***/
-                            if (responseBuilder.toString().contains("transition")) {
+                            /***reach!の文字列が含まれているし、画面遷移させる、バックグラウンドでmain動かす***/
+                            if (responseBuilder.toString().contains("reach!"))
+                            {
                                 String response = responseBuilder.toString();
                                 Log.d("TCP", "Received from server: " + response);
 
@@ -90,28 +104,50 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(intent);
                                 });
                             }
-                            /***Hit！の文字列が含まれていたらソケットを閉じて、遷移させる***/
-                            if (responseBuilder.toString().contains("transition")) {
+                            /***zannnen！の文字列が含まれていたら、画面遷移させる、バックグラウンドでmain動かす***/
+                            if (responseBuilder.toString().contains("za"))
+                            {
                                 String response = responseBuilder.toString();
                                 Log.d("TCP", "Received from server: " + response);
 
                                 // UIスレッドでのアクション
-                                runOnUiThread(() -> {
-                                    Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
+                                runOnUiThread(() ->
+                                {
+                                    Intent intent = new Intent(MainActivity.this, HazureVideoActivity.class);
                                     startActivity(intent);
                                 });
-                                break;
+                                break; //サーバーとの接続を抜ける
+                            }
+
+                            /***Hit！の文字列が含まれていたらソケットを閉じて、遷移させる***/
+                            if (responseBuilder.toString().contains("transition"))
+                            {
+                                String response = responseBuilder.toString();
+                                Log.d("TCP", "Received from server: " + response);
+
+                                // UIスレッドでのアクション
+                                runOnUiThread(() ->
+                                {
+                                    Intent intent = new Intent(MainActivity.this, AtariVideoActivity.class);
+                                    startActivity(intent);
+                                });
+                                break; //サーバーとの接続を抜ける
                             }
                         }
-                    } catch (java.net.SocketTimeoutException e) {
+                    }
+                    catch (java.net.SocketTimeoutException e)
+                    {
                         Log.d("TCP", "Read timeout reached");
+                        //エラー処理
                     }
 
                     // ソケットを閉じる
                     socket.close();
                     Log.d("TCP", "Socket closed");
 
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     Log.e("TCP", "Error: " + e.getMessage(), e);
                 }
             }

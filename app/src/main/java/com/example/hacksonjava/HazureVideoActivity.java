@@ -1,10 +1,14 @@
 package com.example.hacksonjava;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.MediaController;
 import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent;
 
+
+/***main動画から遷移してきて、外れ映像を流し、終わったらループを動画に戻す***/
 public class HazureVideoActivity extends AppCompatActivity {
 
     @Override
@@ -28,9 +32,14 @@ public class HazureVideoActivity extends AppCompatActivity {
         //動画開始
         videoView.start();
 
-//        //動画が終わったら、Loop動画を流すための画面を遷移のためのインテントを作成
-//        Intent intent = new Intent(HazureVideoActivity.this, LoopVideoActivity.class);
-//        //作成したいんてんとを実行
-//        startActivity(intent);
+        // 動画再生が終了したときのリスナーを設定
+        videoView.setOnCompletionListener(mp -> {
+            // 動画が終了したらMainActivityに遷移
+            Intent intent = new Intent(HazureVideoActivity.this, LoopVideoActivity.class);
+            startActivity(intent);
+
+            // HazureVideoActivityを終了する
+            finish();
+        });
     }
 }

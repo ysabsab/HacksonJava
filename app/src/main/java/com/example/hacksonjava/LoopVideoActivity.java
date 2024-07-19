@@ -6,6 +6,7 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 /**メインから状態遷移をしてきて、ループ画像を流す処理**/
 public class LoopVideoActivity extends AppCompatActivity{
     @Override
@@ -18,7 +19,7 @@ public class LoopVideoActivity extends AppCompatActivity{
         VideoView videoView = findViewById(R.id.videoView);
 
         // 動画のURIを設定
-        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.sample_video);
+        Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.loop_video);
         videoView.setVideoURI(videoUri);
 
         // メディアコントローラーを追加
