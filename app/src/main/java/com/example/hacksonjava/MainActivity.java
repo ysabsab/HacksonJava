@@ -1,28 +1,22 @@
 package com.example.hacksonjava;
 
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import androidx.appcompat.app.AppCompatActivity;
+import java.io.OutputStream;
+import java.net.Socket;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity
-{
+public class MainActivity extends AppCompatActivity {
     /***このクラスで利用する変数定義***/
-    // 送信するリストの変数
-    private List<String> selectedTexts = new ArrayList<>();
+    // 送信するテキストの設定
+    private String selectedText = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,54 +30,47 @@ public class MainActivity extends AppCompatActivity
         });
 
         /************↓activity_mainの各種機能を変数にするプール↓**********************/
-        //チェックボックスに入れられた文字をまず変数に格納する
-        CheckBox CheckBox_mozi = findViewById(R.id.checkBox);
-
         //ボタンが押されたら、入力された文字を判定
-        Button sendButton = (Button) this.findViewById(R.id.button);
+        Button sendButton = findViewById(R.id.button);
 
-        /************↓activity_mainの各種機能を変数にするプール↓**********************/
-
-
-        /***チェックボックスの状態遷移を監視しておき、チャックの有無でリストにチャックの文字を入力するか決める。***/
-        //一個目のチェックボックス
-        CheckBox_mozi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        /************↑activity_mainの各種機能を変数にするプール↑**********************/
+        sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            //チェックボックスで取り出した数値をリストに格納する。
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    selectedTexts.add(CheckBox_mozi.getText().toString());
-                } else {
-                    selectedTexts.remove(CheckBox_mozi.getText().toString());
-                }
+            public void onClick(View v) {
+                sendSelectedText();
             }
-        });
-
-        //二個目のチェックボックス
-        //**ここにチェックボックスを取り出す機能を複数入れる**//
-
-        //ボタンの動作設定
-        sendButton.setOnClickListener(v -> {
-            // リストの内容を送信する処理
-            sendSelectedTexts();
         });
     }
 
-        //送信処理
-        private void sendSelectedTexts() {
-            // 送信するリストの内容をログに出力する
-            for (String text : selectedTexts) {
-                Log.d("Selected Text", text);
+    //送信処理
+    private void sendSelectedText() {
+        selectedText = "開始";
+        // 送信する文字のログを出力する
+        Log.d("Selected Text", selectedText);
+
+        // サーバーにデータを送信
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Log.d("TCP", "Connecting to server...");
+                    // サーバーのIPアドレスとポート番号を指定してソケットを作成
+                    Socket socket = new Socket("10.0.0.102", 5000);
+
+                    Log.d("TCP", "Connected to server");
+                    OutputStream outputStream = socket.getOutputStream();
+                    outputStream.write(selectedText.getBytes());
+                    outputStream.flush();
+                    Log.d("TCP", "Data sent");
+                    socket.close();
+                    Log.d("TCP", "Socket closed");
+
+                    Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    Log.e("TCP", "Error: " + e.getMessage(), e);
+                }
             }
-            /***↓ここにリストの内容を送信する処理を実装↓***/
-
-
-            /***↑ここにリストの内容を送信する処理を実装↑***/
-
-            //送信処理が行われたら、Loop動画を流すための画面を遷移のためのインテントを作成
-            Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
-
-            //作成したいんてんとを実行
-            startActivity(intent);
-        }
+        }).start();
+    }
 }
