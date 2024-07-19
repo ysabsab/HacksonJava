@@ -86,5 +86,4 @@ public class MainActivity extends AppCompatActivity
             //作成したいんてんとを実行
             startActivity(intent);
         }
-    //test
 }
