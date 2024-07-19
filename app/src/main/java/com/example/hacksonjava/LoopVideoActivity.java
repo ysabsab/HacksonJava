@@ -26,6 +26,9 @@ public class LoopVideoActivity extends AppCompatActivity{
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
+        // 動画が終了したときに再生をループするためのリスナーを設定
+        videoView.setOnCompletionListener(mp -> videoView.start());
+
         // 動画の再生を開始
         videoView.start();
     }
