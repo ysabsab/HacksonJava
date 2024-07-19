@@ -1,6 +1,9 @@
 package com.example.hacksonjava;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.MediaController;
+import android.widget.VideoView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +68,25 @@ public class MainActivity extends AppCompatActivity
             Log.d("Selected Text", text);
         }
           */
+
+        //動画再生プログラム
+        playMovie();
+
+    }
+
+    private void playMovie(){
+        VideoView videoView = (VideoView) findViewById(R.id.videoView);
+
+        //ビデオファイルの取得
+        videoView.setVideoPath("android.resource://"+getPackageName()+"/"+ R.raw.jyanpati);
+
+        //ビデオのコントトール
+        MediaController mediaController = new MediaController(this);
+        mediaController.setAnchorView(videoView);
+        videoView.setMediaController(mediaController);
+
+        //ビデオの再生
+        videoView.start();
     }
     //test
 }
