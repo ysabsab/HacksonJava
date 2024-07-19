@@ -45,24 +45,30 @@ public class MainActivity extends AppCompatActivity
 
         /************↑activity_mainの各種機能を変数にするプール↑**********************/
 
+        //buttonを押された時の処理
         sendButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
+                //送信する処理の関数に投げる。
                 sendSelectedText();
+
+                /*****↓テスト項目(本来ない機能)*****/
                 Intent intent = new Intent(MainActivity.this, HazureVideoActivity.class);
                 //LoopVideoActivity.class
                 startActivity(intent);
+                /*****↑テスト項目(本来ない機能)*****/
             }
         });
     }
-    //
+
+    //画面レイアウトのビデオの設定
     private void playMovie()
     {
         VideoView videoView = (VideoView) findViewById(R.id.videoView);
 
-        //ビデオファイルの取得
+        //ビデオファイルの取得(ジャンパチの説明)
         videoView.setVideoPath("android.resource://"+getPackageName()+"/"+ R.raw.jyanpati);
 
         //ビデオのコントトール
@@ -70,16 +76,16 @@ public class MainActivity extends AppCompatActivity
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
-        //ビデオの再生
+        //ビデオの再生(ジャンパチの説明ビデオ)
         videoView.start();
     }
 
-    //送信処理
+    /****送信処理****/
     private void sendSelectedText()
     {
-        selectedText = "start";
-        // 送信する文字のログを出力する
-        Log.d("Selected Text", selectedText);
+        selectedText = "start";                     //送信するテキスト
+
+        Log.d("Selected Text", selectedText);       // 送信する文字のログを出力する
 
         // サーバーにデータを送信するスレッドを立てる。
         new Thread(new Runnable()
@@ -121,7 +127,7 @@ public class MainActivity extends AppCompatActivity
                                 String response = responseBuilder.toString();
                                 Log.d("TCP", "Received from server: " + response);
 
-                                // UIスレッドでのアクション
+                                // UIスレッドでのアクション、バックグラウンドでmainを動かしたいため
                                 runOnUiThread(() -> {
                                     Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
                                     startActivity(intent);
@@ -133,13 +139,12 @@ public class MainActivity extends AppCompatActivity
                                 String response = responseBuilder.toString();
                                 Log.d("TCP", "Received from server: " + response);
 
-                                // UIスレッドでのアクション
+                                // UIスレッドでのアクション、バックグラウンドでmainを動かしたいため
                                 runOnUiThread(() ->
                                 {
                                     Intent intent = new Intent(MainActivity.this, HazureVideoActivity.class);
                                     startActivity(intent);
                                 });
-                                break; //サーバーとの接続を抜ける
                             }
 
                             /***Hit！の文字列が含まれていたらソケットを閉じて、遷移させる***/
@@ -154,7 +159,7 @@ public class MainActivity extends AppCompatActivity
                                     Intent intent = new Intent(MainActivity.this, AtariVideoActivity.class);
                                     startActivity(intent);
                                 });
-                                break; //サーバーとの接続を抜ける
+                                break; //サーバーとの接続を続けるwhileを抜ける
                             }
                         }
                     }
