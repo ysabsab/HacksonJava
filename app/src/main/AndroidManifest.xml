@@ -33,6 +33,7 @@
         <activity android:name=".AtariVideoActivity" />
         <activity android:name=".HazureVideoActivity" />
         <activity android:name=".ReachLoopVideoActivity" />
+        <activity android:name=".IntoReachLoopVideoActivity" />
 
     </application>
 

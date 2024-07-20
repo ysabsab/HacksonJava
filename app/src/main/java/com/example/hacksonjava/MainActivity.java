@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity
         mediaController.setAnchorView(videoView);
         videoView.setMediaController(mediaController);
 
+        // 動画が終了したときに再生をループするためのリスナーを設定
+        videoView.setOnCompletionListener(mp -> videoView.start());
         //ビデオの再生(ジャンパチの説明ビデオ)
         videoView.start();
     }
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity
 
                                 // UIスレッドでのアクション、バックグラウンドでmainを動かしたいため
                                 runOnUiThread(() -> {
-                                    Intent intent = new Intent(MainActivity.this, ReachLoopVideoActivity.class);
+                                    Intent intent = new Intent(MainActivity.this, IntoReachLoopVideoActivity.class);
                                     startActivity(intent);
                                 });
                                 responseBuilder.setLength(0); // responseBuilderをクリア
