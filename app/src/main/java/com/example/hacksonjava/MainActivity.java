@@ -17,11 +17,11 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.io.InputStream;
 
+/****main****/
 public class MainActivity extends AppCompatActivity
 {
     /***このクラスで利用する変数定義***/
-    // 送信するテキストの設定
-    private String selectedText = "";
+    private String selectedText = "";       // 送信するテキストの設定
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,13 +39,10 @@ public class MainActivity extends AppCompatActivity
         //動画再生プログラム
         playMovie();
 
-        /************↓activity_mainの各種機能を変数にするプール↓**********************/
-        //ボタンが押されたら、入力された文字を判定
-        Button sendButton = findViewById(R.id.button);
+        /**↓activity_mainの各種機能を変数にするプール↓**/
+        Button sendButton = findViewById(R.id.button);      //ボタンが押されたら、入力された文字を判定
 
-        /************↑activity_mainの各種機能を変数にするプール↑**********************/
-
-        //buttonを押された時の処理
+        /***buttonを押された時の処理***/
         sendButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -54,16 +51,16 @@ public class MainActivity extends AppCompatActivity
                 //送信する処理の関数に投げる。
                 sendSelectedText();
 
-                /*****↓テスト項目(本来ない機能)*****/
+                /**↓テスト項目(本来ない機能)**/
                 Intent intent = new Intent(MainActivity.this, HazureVideoActivity.class);
                 //LoopVideoActivity.class
                 startActivity(intent);
-                /*****↑テスト項目(本来ない機能)*****/
+                /**↑テスト項目(本来ない機能)**/
             }
         });
     }
 
-    //画面レイアウトのビデオの設定
+    /****画面レイアウトのビデオの設定****/
     private void playMovie()
     {
         VideoView videoView = (VideoView) findViewById(R.id.videoView);
@@ -83,11 +80,10 @@ public class MainActivity extends AppCompatActivity
     /****送信処理****/
     private void sendSelectedText()
     {
-        selectedText = "start";                     //送信するテキスト
-
+        selectedText = "start";                     //送信するテキストの設定
         Log.d("Selected Text", selectedText);       // 送信する文字のログを出力する
 
-        // サーバーにデータを送信するスレッドを立てる。
+        /*** サーバーにデータを送信するスレッドを立てる。 ***/
         new Thread(new Runnable()
         {
             @Override
@@ -96,8 +92,7 @@ public class MainActivity extends AppCompatActivity
                 try
                 {
                     Log.d("TCP", "Connecting to server...");
-                    // サーバーのIPアドレスとポート番号を指定してソケットを作成
-                    Socket socket = new Socket("10.0.0.102", 5000);
+                    Socket socket = new Socket("10.0.0.102", 5000); // サーバーのIPアドレスとポート番号を指定してソケットを作成
 
                     Log.d("TCP", "Connected to server");
                     OutputStream outputStream = socket.getOutputStream();
@@ -132,6 +127,7 @@ public class MainActivity extends AppCompatActivity
                                     Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
                                     startActivity(intent);
                                 });
+                                responseBuilder.setLength(0); // responseBuilderをクリア
                             }
                             /***zannnen！の文字列が含まれていたら、画面遷移させる、バックグラウンドでmain動かす***/
                             if (responseBuilder.toString().contains("za"))
@@ -145,6 +141,7 @@ public class MainActivity extends AppCompatActivity
                                     Intent intent = new Intent(MainActivity.this, HazureVideoActivity.class);
                                     startActivity(intent);
                                 });
+                                responseBuilder.setLength(0); // responseBuilderをクリア
                             }
 
                             /***Hit！の文字列が含まれていたらソケットを閉じて、遷移させる***/
