@@ -16,11 +16,11 @@ public class LoopVideoActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_video);
 
         //()、取得する
         VideoView videoView = findViewById(R.id.videoView);
-        Button Button = findViewById(R.id.button);
+        //Button Button = findViewById(R.id.button);
 
         // 動画のURIを設定
         Uri videoUri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.loop_video);
@@ -37,17 +37,16 @@ public class LoopVideoActivity extends AppCompatActivity{
         // 動画の再生を開始
         videoView.start();
 
-        //ボタンを押されたらループ動画を最初から再生
-        Button.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                // 動画の再生位置を0にリセットし、最初から再生
-                videoView.seekTo(0);
-                videoView.start();
-            }
-        });
-
+//        // ボタンを押されたらループ動画を最初から再生
+//        Button.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View v)
+//            {
+//                // 動画の再生位置を0にリセットし、最初から再生
+//                videoView.seekTo(0);
+//                videoView.start();
+//            }
+//        });
     }
 }

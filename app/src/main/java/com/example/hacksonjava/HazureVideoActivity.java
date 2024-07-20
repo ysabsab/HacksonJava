@@ -51,7 +51,7 @@ public class HazureVideoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(HazureVideoActivity.this, LoopVideoActivity.class);
+                Intent intent = new Intent(HazureVideoActivity.this, ReachLoopVideoActivity.class);
                 //LoopVideoActivity.class
                 startActivity(intent);
             }

@@ -51,11 +51,11 @@ public class MainActivity extends AppCompatActivity
                 //送信する処理の関数に投げる。
                 sendSelectedText();
 
-                /**↓テスト項目(本来ない機能)**/
-                Intent intent = new Intent(MainActivity.this, HazureVideoActivity.class);
+                /**↓ループの動画のアクティビティに遷移**/
+                Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
                 //LoopVideoActivity.class
                 startActivity(intent);
-                /**↑テスト項目(本来ない機能)**/
+                /**↑ループの動画のアクティビティに遷移**/
             }
         });
     }
@@ -124,13 +124,13 @@ public class MainActivity extends AppCompatActivity
 
                                 // UIスレッドでのアクション、バックグラウンドでmainを動かしたいため
                                 runOnUiThread(() -> {
-                                    Intent intent = new Intent(MainActivity.this, LoopVideoActivity.class);
+                                    Intent intent = new Intent(MainActivity.this, ReachLoopVideoActivity.class);
                                     startActivity(intent);
                                 });
                                 responseBuilder.setLength(0); // responseBuilderをクリア
                             }
                             /***zannnen！の文字列が含まれていたら、画面遷移させる、バックグラウンドでmain動かす***/
-                            if (responseBuilder.toString().contains("za"))
+                            if (responseBuilder.toString().contains("Lose!"))
                             {
                                 String response = responseBuilder.toString();
                                 Log.d("TCP", "Received from server: " + response);
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity
                             }
 
                             /***Hit！の文字列が含まれていたらソケットを閉じて、遷移させる***/
-                            if (responseBuilder.toString().contains("transition"))
+                            if (responseBuilder.toString().contains("Hit!"))
                             {
                                 String response = responseBuilder.toString();
                                 Log.d("TCP", "Received from server: " + response);
