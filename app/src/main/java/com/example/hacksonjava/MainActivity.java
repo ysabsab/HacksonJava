@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity
                 try
                 {
                     Log.d("TCP", "Connecting to server...");
-                    Socket socket = new Socket("10.0.0.102", 5000); // サーバーのIPアドレスとポート番号を指定してソケットを作成
+                    Socket socket = new Socket("192.168.11.40", 5000); // サーバーのIPアドレスとポート番号を指定してソケットを作成
 
                     Log.d("TCP", "Connected to server");
                     OutputStream outputStream = socket.getOutputStream();

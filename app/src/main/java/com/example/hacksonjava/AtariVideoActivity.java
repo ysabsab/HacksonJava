@@ -43,7 +43,7 @@ public class AtariVideoActivity extends AppCompatActivity{
         // バイブレーターが存在するか？
         if (vibrator != null && vibrator.hasVibrator()) {
             // バイブレーションスタート（50ミリ秒の休止、バイブレーション、200ミリ秒）
-            vibrator.vibrate(new long[]{50, 2000, 50, 2000,100,2000}, -1); // -1はパターンを繰り返さないことを意味します
+            vibrator.vibrate(new long[]{50, 2000, 50, 2000,100,2000,16000,2000,50,2000,200,3000}, -1); // -1はパターンを繰り返さないことを意味します
             Log.d("VibrationTest", "Vibration started");
         }
         else {
