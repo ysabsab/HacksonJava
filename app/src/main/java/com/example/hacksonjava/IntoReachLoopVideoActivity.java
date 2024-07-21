@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.MediaController;
 import android.widget.VideoView;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +14,7 @@ public class IntoReachLoopVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_video);
+        setContentView(R.layout.activity_only_video);
 
         //()、取得する
         VideoView videoView = findViewById(R.id.videoView);
@@ -42,7 +43,6 @@ public class IntoReachLoopVideoActivity extends AppCompatActivity {
             // 動画が終了したらMainActivityに遷移
             Intent intent = new Intent(IntoReachLoopVideoActivity.this, ReachLoopVideoActivity.class);
             startActivity(intent);
-
             // IntoReachVideoActivityを終了する
             finish();
         });

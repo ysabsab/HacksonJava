@@ -17,7 +17,7 @@ public class HazureVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //どの画面と対応づけるか。
-        setContentView(R.layout.activity_video);
+        setContentView(R.layout.activity_only_video);
 
         //画面を作っているxmlファイルのやつを変数に落とし込み
         VideoView videoView = findViewById(R.id.videoView);
